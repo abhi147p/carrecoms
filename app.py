@@ -16,6 +16,8 @@ def webhook():
 
     # Extract user query from Dialogflow's request
     user_query = req.get('queryInput', {}).get('text', {}).get('text', '')
+    
+    print(f"Web hook is getting triggered: {user_query}")
 
     # Send user query to GPT API
     completion = client.chat.completions.create(
