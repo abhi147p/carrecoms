@@ -36,6 +36,7 @@ def webhook():
     
     # Return GPT response to Dialogflow
     return jsonify({
+        "fulfillmentText": gpt_response,
         "fulfillmentMessages": [
             {"text": {"text": [gpt_response]}}
         ]
