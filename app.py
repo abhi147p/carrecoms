@@ -19,7 +19,7 @@ def webhook():
     req = request.get_json()
 
     # Extract user query from Dialogflow's request
-    user_query = req.get('queryInput', {}).get('text', {}).get('text', '')
+    user_query = req.get('queryResult', {}).get('queryText', '')
     
     print(f"Web hook is getting triggered: {req}")
     logging.info(f"Handling a request to endpoint: {req}")
@@ -28,7 +28,7 @@ def webhook():
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant for answering all questions, mainly questions about cars."},
+            {"role": "system", "content": "You are a helpful assistant for answering all questions, mainly questions about cars. Also don't give the answer in bold text. Give normal only."},
             {
                 "role": "user",
                 "content": user_query
