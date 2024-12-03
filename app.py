@@ -23,6 +23,7 @@ def webhook():
     
     print(f"Web hook is getting triggered: {req}")
     logging.info(f"Handling a request to endpoint: {req}")
+    logging.info("===================================================================================")
 
     # Send user query to GPT API
     completion = client.chat.completions.create(
@@ -37,6 +38,10 @@ def webhook():
     )
     
     gpt_response = completion.choices[0].message.content.strip()
+    
+    logging.info(f"Output response: {completion}")
+    logging.info("===================================================================================")
+    logging.info(f"Final response: {gpt_response}")
     
     # Return GPT response to Dialogflow
     return jsonify({
