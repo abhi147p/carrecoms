@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
 from settings import *
 import os
+import logging
 
 app = Flask(__name__)
+
+logging.basicConfig(level=logging.INFO)
 
 OPEN_AI_KEY = os.getenv("OPEN_AI")
 
@@ -18,7 +21,8 @@ def webhook():
     # Extract user query from Dialogflow's request
     user_query = req.get('queryInput', {}).get('text', {}).get('text', '')
     
-    print(f"Web hook is getting triggered: {user_query}")
+    print(f"Web hook is getting triggered: {req}")
+    logging.info(f"Handling a request to endpoint: {req}")
 
     # Send user query to GPT API
     completion = client.chat.completions.create(
